@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'LogIn',
+                'Log In',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => HomeScreen()), // Replace with HomeScreen
                       );
                     },
-                    child: Text('Login'),
+                    child: Text('Log In'),
                   ),
                   Text.rich(
                     TextSpan(
