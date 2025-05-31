@@ -47,21 +47,32 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(height: 24.0),
 
             //Login Form
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextField(
-                    decoration: InputDecoration(labelText: 'Username'),
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      filled: true,
+                      fillColor: Color(0xFFFFFDE7), // light yellow
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
                   ),
                   SizedBox(height: 16.0),
                   TextField(
-                    decoration: InputDecoration(labelText: 'Password'),
-                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      filled: true,
+                      fillColor: Color(0xFFFFFDE7), // light yellow
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
                   ),
-                  SizedBox(height: 24.0),
+                  SizedBox(height: 16.0),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -71,6 +82,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     child: Text('Log In'),
                   ),
+                  SizedBox(height: 16.0),
                   Text.rich(
                     TextSpan(
                       text: "Don't have an account? ",
