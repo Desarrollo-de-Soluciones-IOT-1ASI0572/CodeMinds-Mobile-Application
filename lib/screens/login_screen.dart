@@ -1,4 +1,6 @@
 import 'package:codeminds_mobile_application/screens/home_screen.dart';
+import 'package:codeminds_mobile_application/screens/register_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -25,7 +27,7 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Login',
+                'LogIn',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -49,13 +51,36 @@ class LoginScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 24.0),
                   ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()), // Replace with HomeScreen
                       );
                     },
                     child: Text('Login'),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "Don't have an account? ",
+                      style: TextStyle(fontSize: 16.0, color: Colors.black54),
+                      children: [
+                        TextSpan(
+                          text: 'Register',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => RegisterScreen()),
+                              );
+                            },
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
