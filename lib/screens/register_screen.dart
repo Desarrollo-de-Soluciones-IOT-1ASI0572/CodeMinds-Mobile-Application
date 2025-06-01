@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:codeminds_mobile_application/screens/home_screen.dart';
 import 'package:codeminds_mobile_application/screens/login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  String? selectedGender;
+  String? selectedRole;
+  bool agreedTerms = false;
 
   @override
   Widget build(BuildContext context) {
@@ -13,55 +22,47 @@ class RegisterScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              String? selectedGender;
-              String? selectedRole;
-              bool agreedTerms = false;
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _buildLogo(),
-                  const SizedBox(height: 8.0),
-                  _buildTitle(),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Username'),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Name'),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Email Address'),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Mobile Number'),
-                  const SizedBox(height: 16.0),
-                  _buildDropdown(
-                    label: 'Gender',
-                    items: ['Male', 'Female', 'Other'],
-                    value: selectedGender,
-                    onChanged: (val) => setState(() => selectedGender = val),
-                  ),
-                  const SizedBox(height: 16.0),
-                  _buildDropdown(
-                    label: 'Select a role',
-                    items: ['Student', 'Parent', 'Driver'],
-                    value: selectedRole,
-                    onChanged: (val) => setState(() => selectedRole = val),
-                  ),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Password', obscureText: true),
-                  const SizedBox(height: 16.0),
-                  _buildTextField(label: 'Confirm Password', obscureText: true),
-                  const SizedBox(height: 16.0),
-                  _buildTermsCheckbox(agreedTerms, (val) {
-                    setState(() => agreedTerms = val ?? false);
-                  }),
-                  const SizedBox(height: 16.0),
-                  _buildRegisterButton(context, agreedTerms),
-                  const SizedBox(height: 16.0),
-                  _buildLoginText(context),
-                ],
-              );
-            },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _buildLogo(),
+              const SizedBox(height: 8.0),
+              _buildTitle(),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Username'),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Name'),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Email Address'),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Mobile Number'),
+              const SizedBox(height: 16.0),
+              _buildDropdown(
+                label: 'Gender',
+                items: ['Male', 'Female', 'Other'],
+                value: selectedGender,
+                onChanged: (val) => setState(() => selectedGender = val),
+              ),
+              const SizedBox(height: 16.0),
+              _buildDropdown(
+                label: 'Select a role',
+                items: ['Student', 'Parent', 'Driver'],
+                value: selectedRole,
+                onChanged: (val) => setState(() => selectedRole = val),
+              ),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Password', obscureText: true),
+              const SizedBox(height: 16.0),
+              _buildTextField(label: 'Confirm Password', obscureText: true),
+              const SizedBox(height: 16.0),
+              _buildTermsCheckbox(agreedTerms, (val) {
+                setState(() => agreedTerms = val ?? false);
+              }),
+              const SizedBox(height: 16.0),
+              _buildRegisterButton(context, agreedTerms),
+              const SizedBox(height: 16.0),
+              _buildLoginText(context),
+            ],
           ),
         ),
       ),
