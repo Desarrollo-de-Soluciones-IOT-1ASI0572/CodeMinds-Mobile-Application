@@ -1,225 +1,195 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:codeminds_mobile_application/screens/home_screen.dart';
 import 'package:codeminds_mobile_application/screens/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});  
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String? selectedGender;
-    String? selectedRole;
-    bool agreedTerms = false;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 32,vertical: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
           child: StatefulBuilder(
-            builder: (context, setState){
+            builder: (context, setState) {
+              String? selectedGender;
+              String? selectedRole;
+              bool agreedTerms = false;
+
               return Column(
-                 children: [
-
-                  //Logo
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Image.asset(
-                      'assets/images/CodeMinds-Logo.png',
-                      height: 150,
-                      width: 150,
-                    ),
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _buildLogo(),
+                  const SizedBox(height: 8.0),
+                  _buildTitle(),
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Username'),
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Name'),
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Email Address'),
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Mobile Number'),
+                  const SizedBox(height: 16.0),
+                  _buildDropdown(
+                    label: 'Gender',
+                    items: ['Male', 'Female', 'Other'],
+                    value: selectedGender,
+                    onChanged: (val) => setState(() => selectedGender = val),
                   ),
-
-                  //Title
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Register',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          'Fill in the following registration fields',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
-                          ),
-                        ),
-                      ],
-                    ),
+                  const SizedBox(height: 16.0),
+                  _buildDropdown(
+                    label: 'Select a role',
+                    items: ['Student', 'Parent', 'Driver'],
+                    value: selectedRole,
+                    onChanged: (val) => setState(() => selectedRole = val),
                   ),
-
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Username',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7), // light yellow
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7), // light yellow
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Email Address',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7), // light yellow
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: 'Mobile Number',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7), // light yellow
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  //Gender
-                  DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      labelText: 'Gender',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    items: ['Male', 'Female', 'Other']
-                        .map((gender) => DropdownMenuItem(value: gender, child: Text(gender)))
-                        .toList(),
-                    onChanged: (value) => setState(() => selectedGender = value),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  //Role
-                  DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      labelText: 'Select a role',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    items: ['Student', 'Parent', 'Driver']
-                        .map((role) => DropdownMenuItem(value: role, child: Text(role)))
-                        .toList(),
-                    onChanged: (value) => setState(() => selectedRole = value),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: 'Confirm Password',
-                      filled: true,
-                      fillColor: Color(0xFFFFFDE7),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  //Checkbox
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: agreedTerms,
-                        onChanged: (value)=>setState(()=>agreedTerms= value??false),
-                      ),
-                      Expanded(
-                        child:Text(
-                          'I agree to the Terms and Conditions',
-                          style: TextStyle(color: Colors.black87),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 16),
-
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Colors.cyan,
-                        shape:RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      onPressed: agreedTerms
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => HomeScreen()),
-                              );
-                            }
-                          : null,
-                      child: Text(
-                        'Register',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-
-                  Text.rich(
-                    TextSpan(
-                      text: "Already have an account? ",
-                      style: TextStyle(fontSize: 14.0, color: Colors.black54),
-                      children: [
-                        TextSpan(
-                          text: 'Log In',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                          ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => LoginScreen()),
-                              );
-                            },
-                        ),
-                      ],
-                    ),
-                  ),
-                 ]
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Password', obscureText: true),
+                  const SizedBox(height: 16.0),
+                  _buildTextField(label: 'Confirm Password', obscureText: true),
+                  const SizedBox(height: 16.0),
+                  _buildTermsCheckbox(agreedTerms, (val) {
+                    setState(() => agreedTerms = val ?? false);
+                  }),
+                  const SizedBox(height: 16.0),
+                  _buildRegisterButton(context, agreedTerms),
+                  const SizedBox(height: 16.0),
+                  _buildLoginText(context),
+                ],
               );
-            }
-            ),
+            },
+          ),
         ),
-      )
+      ),
+    );
+  }
+
+  Widget _buildLogo() {
+    return Image.asset(
+      'assets/images/CodeMinds-Logo.png',
+      height: 150,
+      width: 150,
+    );
+  }
+
+  Widget _buildTitle() {
+    return Column(
+      children: const [
+        Text(
+          'Register',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 8.0),
+        Text(
+          'Fill in the following registration fields',
+          style: TextStyle(fontSize: 14, color: Colors.black54),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextField({required String label, bool obscureText = false}) {
+    return TextField(
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: const Color(0xFFFFFDE7),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+    );
+  }
+
+  Widget _buildDropdown({
+    required String label,
+    required List<String> items,
+    required String? value,
+    required Function(String?) onChanged,
+  }) {
+    return DropdownButtonFormField<String>(
+      value: value,
+      decoration: InputDecoration(
+        labelText: label,
+        filled: true,
+        fillColor: const Color(0xFFFFFDE7),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      items: items
+          .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+          .toList(),
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _buildTermsCheckbox(bool value, Function(bool?) onChanged) {
+    return Row(
+      children: [
+        Checkbox(
+          value: value,
+          onChanged: onChanged,
+        ),
+        const Expanded(
+          child: Text(
+            'I agree to the Terms and Conditions',
+            style: TextStyle(color: Colors.black87),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRegisterButton(BuildContext context, bool enabled) {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          backgroundColor: Colors.cyan,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        onPressed: enabled
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              }
+            : null,
+        child: const Text(
+          'Register',
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginText(BuildContext context) {
+    return Text.rich(
+      TextSpan(
+        text: "Already have an account? ",
+        style: const TextStyle(fontSize: 14.0, color: Colors.black54),
+        children: [
+          TextSpan(
+            text: 'Log In',
+            style: const TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+          ),
+        ],
+      ),
     );
   }
 }
